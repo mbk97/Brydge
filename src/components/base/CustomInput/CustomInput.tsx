@@ -32,7 +32,7 @@ const InputComponent = ({
   };
   return (
     <div className="relative">
-      <label htmlFor={name} className={`mb-3 ${labelStyle} block`}>
+      <label htmlFor={name} className={`mb-2 ${labelStyle} block`}>
         {label}
       </label>
       <input

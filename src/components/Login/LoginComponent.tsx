@@ -18,7 +18,7 @@ const LoginComponent = () => {
           <h1 className="text-[#7c4be6] mb-3 text-[2rem]">Brydge</h1>
           <p className="text">Welcome back!</p>
         </div>
-        <div className="w-[100%]">
+        <div className="w-[100%] mb-7">
           <InputComponent
             value={inputData.email}
             name="email"
