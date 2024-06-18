@@ -9,6 +9,7 @@ type IProps = {
 
 const Navbar = ({ handleOpenMenu, user }: IProps) => {
   const userName = user?.email?.split("@")[0];
+  console.log(user?.email);
   const { setOpenModal } = useStore();
 
   const handleOpenModal = () => {

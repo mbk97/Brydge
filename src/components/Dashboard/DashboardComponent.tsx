@@ -53,7 +53,7 @@ const DashboardComponent = ({ user }: any) => {
     setOpenModal(true);
     setStartUpdate(true);
   };
-
+  const userId = user?.id;
   const handleDelete = async (id: string) => {
     setDeleteId(id);
     setDeleteLoading(true);
@@ -82,7 +82,11 @@ const DashboardComponent = ({ user }: any) => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      let { data: expense, error } = await supabase.from("expense").select();
+      let { data: expense, error } = await supabase
+        .from("expense")
+        .select()
+        .eq("user_id", userId)
+        .eq("user_id", userId);
       setExpense(expense);
       console.log(expense, "expense");
       console.log(error);
@@ -134,55 +138,66 @@ const DashboardComponent = ({ user }: any) => {
         {loading ? (
           <Skeleton animation="wave" height={200} width={"100%"} />
         ) : (
-          expenseData && (
-            <section className="mt-8">
-              <table className="w-full border">
-                <thead className="border">
-                  <tr className="rounded-sm text-left bg-[#ebe5ef]">
-                    {tableHeaderData.map((item) => (
-                      <th key={item.id} className="p-2 text-[16px] font-normal">
-                        {item.text}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {expenseData.map((expense: any) => (
-                    <tr key={expense.id} className="border">
-                      <td className="py-[12px] px-2">{expense.budgetName}</td>
-                      <td className="py-[12px] px-2">
-                        {expense.budgetCategory}
-                      </td>
-                      <td className="py-[12px] px-2">
-                        &#8358;{expense.budgetAmount?.toLocaleString()}
-                      </td>
-                      <td className="py-[12px] px-2">{expense.month}</td>
-                      <td>
-                        <CiEdit
-                          size={25}
-                          className="inline-block mr-3 cursor-pointer"
-                          onClick={() => handleSetUpdateData(expense)}
-                        />
-                        {expense.id === deleteId ? (
-                          <ImSpinner
-                            size={25}
-                            className=" animate-spin inline-block mr-3 cursor-pointer text-[#eb4646]"
-                          />
-                        ) : (
-                          <MdOutlineDeleteOutline
-                            size={25}
-                            className="inline-block cursor-pointer text-[#eb4646]"
-                            onClick={() => handleDelete(expense.id)}
-                          />
-                        )}
-                      </td>
+          <>
+            {expenseData && expenseData.length > 0 ? (
+              <section className="mt-8  overflow-x-auto">
+                <table className="w-full border ">
+                  <thead className="border">
+                    <tr className="rounded-sm text-left bg-[#ebe5ef]">
+                      {tableHeaderData.map((item) => (
+                        <th
+                          key={item.id}
+                          className="p-2 text-[16px] font-normal whitespace-nowrap"
+                        >
+                          {item.text}
+                        </th>
+                      ))}
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </section>
-          )
+                  </thead>
+                  <tbody>
+                    {expenseData.map((expense: any) => (
+                      <tr key={expense.id} className="border">
+                        <td className="py-[12px] px-2">{expense.budgetName}</td>
+                        <td className="py-[12px] px-2">
+                          {expense.budgetCategory}
+                        </td>
+                        <td className="py-[12px] px-2">
+                          &#8358;
+                          {Number(expense.budgetAmount)?.toLocaleString()}
+                        </td>
+                        <td className="py-[12px] px-2">{expense.month}</td>
+                        <td>
+                          <CiEdit
+                            size={25}
+                            className="inline-block mr-3 cursor-pointer"
+                            onClick={() => handleSetUpdateData(expense)}
+                          />
+                          {expense.id === deleteId ? (
+                            <ImSpinner
+                              size={25}
+                              className="animate-spin inline-block mr-3 cursor-pointer text-[#eb4646]"
+                            />
+                          ) : (
+                            <MdOutlineDeleteOutline
+                              size={25}
+                              className="inline-block cursor-pointer text-[#eb4646]"
+                              onClick={() => handleDelete(expense.id)}
+                            />
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </section>
+            ) : (
+              <p className="text-[1.4rem] my-10">
+                You have no Budget Created at the moment
+              </p>
+            )}
+          </>
         )}
+
         <CustomModal open={openModal} handleClose={handleCloseModal}>
           <CreateBudget
             userDetails={user}

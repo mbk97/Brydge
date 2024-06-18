@@ -3,12 +3,15 @@ import React, { useState } from "react";
 import InputComponent from "../base/CustomInput/CustomInput";
 import "./style.css";
 import { signup } from "@/app/login/action";
+import Link from "next/link";
 
 const SignUpComponent = () => {
   const [inputData, setInputData] = useState({
     email: "",
     password: "",
   });
+
+  const disable = !inputData.email || !inputData.password;
 
   return (
     <div className="flex h-screen">
@@ -53,12 +56,25 @@ const SignUpComponent = () => {
             <button
               formAction={signup}
               type={"submit"}
+              disabled={disable}
               className={`button text-white bg-[#7c4be6] h-[45px]  cursor-pointer  rounded-[10px] w-[100%] font-semibold flex justify-center items-center gap-3 `}
+              style={{
+                opacity: disable ? 0.5 : 1,
+                cursor: disable ? "not-allowed" : "pointer",
+              }}
             >
               Sign up
             </button>
           </div>
         </form>
+        <div className="w-[100%] mt-5 flex justify-end">
+          <p>
+            Already have an account ?{" "}
+            <Link href={"/"} className=" text-[#7c4be6]">
+              Login
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );

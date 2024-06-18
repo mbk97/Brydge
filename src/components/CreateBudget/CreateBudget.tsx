@@ -4,6 +4,7 @@ import { getMonth } from "@/util/getMonth";
 import { createClient } from "@/utils/supabase/client";
 import { useStore } from "@/store/strore";
 import { toast } from "react-toastify";
+import { MdClose } from "react-icons/md";
 
 type IProps = {
   fetchData: () => void;
@@ -128,9 +129,16 @@ const CreateBudget = ({
   };
   return (
     <div>
-      <h1 className="text-[1.4rem] font-semibold text-[#7c4be6]">
-        Create a budget
-      </h1>
+      <div className="flex justify-between items-center">
+        <h1 className="text-[1.4rem] font-semibold text-[#7c4be6]">
+          {startUpdate ? "Update budget" : "Create a budget"}
+        </h1>
+        <MdClose
+          size={25}
+          className="text-[#ea6464] cursor-pointer"
+          onClick={() => setOpenModal(false)}
+        />
+      </div>
       <div className="mt-3">
         <InputComponent
           value={currentMonth}
@@ -161,11 +169,13 @@ const CreateBudget = ({
           label="Monthly Limit"
           placeholder="Enter monthly limit"
         />
-        <p className="text-[#e47979] text-[12px]">
-          Your last monthly limit value was{" "}
-          {defaultMonthLimitValue.toLocaleString()}, you can change this if you
-          wish
-        </p>
+        {defaultMonthLimitValue && (
+          <p className="text-[#e47979] text-[12px]">
+            Your last monthly limit value was{" "}
+            {defaultMonthLimitValue?.toLocaleString()}, you can change this if
+            you wish
+          </p>
+        )}
       </div>
       <div className="mt-3">
         <InputComponent
