@@ -16,9 +16,9 @@ export async function login(formData: FormData) {
     data,
   );
 
-  if (error) {
-    return;
-  }
+  // if (error) {
+  //   return;
+  // }
 
   revalidatePath("/", "layout");
   redirect("/dashboard");
@@ -34,9 +34,9 @@ export async function signup(formData: FormData) {
 
   const { error, data: userData } = await supabase.auth.signUp(data);
 
-  if (error) {
-    return;
-  }
+  // if (error) {
+  //   return;
+  // }
 
   revalidatePath("/", "layout");
   redirect("/dashboard");
