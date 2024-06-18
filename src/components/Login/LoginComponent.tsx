@@ -69,7 +69,7 @@ const LoginComponent = () => {
 
         <div className="w-[100%] mt-5 flex justify-end">
           <p>
-            Don't have an account ?{" "}
+            Don&apos;t have an account ?{" "}
             <Link href={"/signup"} className=" text-[#7c4be6]">
               Sign up
             </Link>
