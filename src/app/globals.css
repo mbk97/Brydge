@@ -7,30 +7,34 @@ body {
   padding: 0;
 }
 
+/* Initial sidebar wrapper style */
 .sideBarWrapper {
-  display: block;
+  display: none;
   transition: all ease-in-out 0.2s;
   width: 20%;
 }
-.sideBarWrapper {
-  @media (max-width: 1200px) {
+
+/* Responsive sidebar for screens with max-width 1200px */
+@media (max-width: 1200px) {
+  .sideBarWrapper {
     position: absolute;
-    top: 0px;
-    left: 0;
+    top: 0;
+    left: -100%;
     transition: all ease-in-out 0.2s;
     height: 100vh;
     z-index: 400;
     width: 50% !important;
   }
-}
 
-.sideBarWrapper.active {
-  position: absolute;
-  height: auto;
-  z-index: 10;
-  left: -500px;
-  opacity: 0;
-  top: 0px;
-  transition: all ease-in-out 0.2s;
-  width: 30%;
+  /* Style for when the sidebar is active */
+  .sideBarWrapper.active {
+    display: block;
+    position: absolute;
+    left: 0;
+    opacity: 1;
+    top: 0;
+    transition: all ease-in-out 0.2s;
+    height: 100vh;
+    width: 50% !important;
+  }
 }
