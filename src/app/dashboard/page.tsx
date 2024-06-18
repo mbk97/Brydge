@@ -1,10 +1,16 @@
 import DashboardComponent from "@/components/Dashboard/DashboardComponent";
-import React from "react";
+import { createClient } from "@/utils/supabase/server";
+import React, { useEffect } from "react";
 
-const Dashboard = () => {
+const Dashboard = async () => {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   return (
     <div>
-      <DashboardComponent />
+      <DashboardComponent user={user} />
     </div>
   );
 };

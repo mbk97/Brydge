@@ -1,16 +1,24 @@
+import { useStore } from "@/store/strore";
 import React from "react";
 import { MdMenu } from "react-icons/md";
 
 type IProps = {
   handleOpenMenu: () => void;
-  handleOpenModal: () => void;
+  user: any;
 };
 
-const Navbar = ({ handleOpenMenu, handleOpenModal }: IProps) => {
+const Navbar = ({ handleOpenMenu, user }: IProps) => {
+  const userName = user?.email?.split("@")[0];
+  console.log(user?.email);
+  const { setOpenModal } = useStore();
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
   return (
     <>
       <div className="flex justify-between items-center w-full">
-        <h2 className="font-medium text-[1.4rem]">Hello, Mubarak 👋</h2>
+        <h2 className="font-medium text-[1.4rem]">Hello, {userName} 👋</h2>
         <div className="flex items-center">
           <button
             type={"submit"}

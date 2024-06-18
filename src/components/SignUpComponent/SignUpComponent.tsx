@@ -1,15 +1,16 @@
 "use client";
 import React, { useState } from "react";
-import { login } from "@/app/login/action";
-import "./style.css";
 import InputComponent from "../base/CustomInput/CustomInput";
+import "./style.css";
+import { signup } from "@/app/login/action";
 import Link from "next/link";
 
-const LoginComponent = () => {
+const SignUpComponent = () => {
   const [inputData, setInputData] = useState({
     email: "",
     password: "",
   });
+
   const disable = !inputData.email || !inputData.password;
 
   return (
@@ -18,7 +19,7 @@ const LoginComponent = () => {
       <div className="flex justify-center items-center flex-col lg:w-[50%] w-[100%] p-10">
         <div className="text-center w-[100%] mb-10">
           <h1 className="text-[#7c4be6] mb-3 text-[2rem]">Brydge</h1>
-          <p className="text">Welcome back!</p>
+          <p className="text">Sign up now!</p>
         </div>
         <form className="w-[100%]">
           <div className="w-[100%] mb-7">
@@ -53,25 +54,24 @@ const LoginComponent = () => {
           </div>
           <div className="w-[100%] mt-7">
             <button
-              formAction={login}
-              disabled={disable}
+              formAction={signup}
               type={"submit"}
+              disabled={disable}
               className={`button text-white bg-[#7c4be6] h-[45px]  cursor-pointer  rounded-[10px] w-[100%] font-semibold flex justify-center items-center gap-3 `}
               style={{
                 opacity: disable ? 0.5 : 1,
                 cursor: disable ? "not-allowed" : "pointer",
               }}
             >
-              Login
+              Sign up
             </button>
           </div>
         </form>
-
         <div className="w-[100%] mt-5 flex justify-end">
           <p>
-            Don't have an account ?{" "}
-            <Link href={"/signup"} className=" text-[#7c4be6]">
-              Sign up
+            Already have an account ?{" "}
+            <Link href={"/"} className=" text-[#7c4be6]">
+              Login
             </Link>
           </p>
         </div>
@@ -80,4 +80,4 @@ const LoginComponent = () => {
   );
 };
 
-export default LoginComponent;
+export default SignUpComponent;
