@@ -85,7 +85,6 @@ const DashboardComponent = ({ user }: any) => {
       let { data: expense, error } = await supabase
         .from("expense")
         .select()
-        .eq("user_id", userId)
         .eq("user_id", userId);
       setExpense(expense);
       console.log(expense, "expense");
