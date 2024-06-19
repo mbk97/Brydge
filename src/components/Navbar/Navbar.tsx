@@ -27,7 +27,7 @@ const Navbar = ({ handleOpenMenu, user }: IProps) => {
           >
             Create Budget
           </button>
-          <div className="ml-6">
+          <div className="ml-6 lg:hidden block">
             <MdMenu
               size={30}
               className="cursor-pointer"

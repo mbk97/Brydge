@@ -9,7 +9,7 @@ body {
 
 /* Initial sidebar wrapper style */
 .sideBarWrapper {
-  display: none;
+  display: block;
   transition: all ease-in-out 0.2s;
   width: 20%;
 }
