@@ -6,7 +6,8 @@ import { toast } from "react-toastify";
 
 const withAuth = (WrappedComponent: any) => {
   const supabase = createClient();
-  return (props: any) => {
+
+  const AuthenticatedComponent = (props: any) => {
     const router = useRouter();
     const [authenticated, setAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -41,6 +42,12 @@ const withAuth = (WrappedComponent: any) => {
 
     return <WrappedComponent {...props} />;
   };
+
+  AuthenticatedComponent.displayName = `WithAuth(${
+    WrappedComponent.displayName || WrappedComponent.name || "Component"
+  })`;
+
+  return AuthenticatedComponent;
 };
 
 export default withAuth;
