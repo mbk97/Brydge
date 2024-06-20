@@ -99,7 +99,8 @@ const DashboardComponent = ({ user }: any) => {
     fetchData();
   }, []);
 
-  const lastUpdateMonthlyLimit = expenseData[expenseData?.length - 1];
+  const lastUpdateMonthlyLimit =
+    expenseData && expenseData[expenseData?.length - 1];
   const totalSpent = expenseData
     ?.filter(
       (expense: any) =>
@@ -108,7 +109,7 @@ const DashboardComponent = ({ user }: any) => {
     .map((expense: any) => Number(expense.budgetAmount));
 
   const totalSpentValue =
-    totalSpent.length !== 0
+    totalSpent?.length !== 0
       ? totalSpent?.reduce((a: number, b: number) => a + b)
       : [];
 

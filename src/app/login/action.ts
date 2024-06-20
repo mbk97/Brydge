@@ -2,7 +2,6 @@
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { toast } from "react-toastify";
 
 export async function login(formData: FormData) {
   const supabase = createClient();
@@ -15,10 +14,10 @@ export async function login(formData: FormData) {
   const { error, data: userData } = await supabase.auth.signInWithPassword(
     data,
   );
-
-  // if (error) {
-  //   return;
-  // }
+  if (error) {
+    console.error("Login error:", error);
+    redirect("/error");
+  }
 
   revalidatePath("/", "layout");
   redirect("/dashboard");
@@ -34,9 +33,9 @@ export async function signup(formData: FormData) {
 
   const { error, data: userData } = await supabase.auth.signUp(data);
 
-  // if (error) {
-  //   return;
-  // }
+  if (error) {
+    redirect("/error");
+  }
 
   revalidatePath("/", "layout");
   redirect("/dashboard");
