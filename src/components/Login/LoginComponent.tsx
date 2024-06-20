@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import { login } from "@/app/login/action";
 import "./style.css";
 import InputComponent from "../base/CustomInput/CustomInput";
 import Link from "next/link";
@@ -9,11 +8,14 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
 const LoginComponent = () => {
-  const [inputData, setInputData] = useState({
+  const [inputData, setInputData] = useState<{
+    email: string;
+    password: string;
+  }>({
     email: "",
     password: "",
   });
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const disable = !inputData.email || !inputData.password || loading;
   const router = useRouter();
   const supabase = createClient();
@@ -62,7 +64,7 @@ const LoginComponent = () => {
         </div>
         <form
           className="w-[100%]"
-          onSubmit={(e: any) => {
+          onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
             e.preventDefault();
             handleLogin();
           }}

@@ -17,6 +17,9 @@ const CreateBudget = ({
   fetchData,
   monthLimit: defaultMonthLimitValue,
 }: IProps) => {
+  const formatNumberWithCommas = (number: number) => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
   const {
     updateData,
     setOpenModal,
@@ -36,8 +39,6 @@ const CreateBudget = ({
   const currentDate = new Date();
   const currentMonth = getMonth(currentDate);
   const supabase = createClient();
-
-  console.log(defaultMonthLimitValue);
 
   const { monthLimit, budgetName, budgetAmount, budgetCategory } = inputData;
 

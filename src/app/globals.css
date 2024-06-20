@@ -7,14 +7,12 @@ body {
   padding: 0;
 }
 
-/* Initial sidebar wrapper style */
 .sideBarWrapper {
   display: block;
   transition: all ease-in-out 0.2s;
   width: 20%;
 }
 
-/* Responsive sidebar for screens with max-width 1200px */
 @media (max-width: 1200px) {
   .sideBarWrapper {
     position: absolute;
@@ -26,7 +24,6 @@ body {
     width: 50% !important;
   }
 
-  /* Style for when the sidebar is active */
   .sideBarWrapper.active {
     display: block;
     position: absolute;
