@@ -2,19 +2,20 @@
 import React, { useState } from "react";
 import InputComponent from "../base/CustomInput/CustomInput";
 import "./style.css";
-import { signup } from "@/app/login/action";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
 import { toast } from "react-toastify";
-import { localeData } from "moment";
 
 const SignUpComponent = () => {
-  const [inputData, setInputData] = useState({
+  const [inputData, setInputData] = useState<{
+    email: string;
+    password: string;
+  }>({
     email: "",
     password: "",
   });
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const disable = !inputData.email || !inputData.password || loading;
   const router = useRouter();
   const supabase = createClient();
@@ -62,7 +63,7 @@ const SignUpComponent = () => {
         </div>
         <form
           className="w-[100%]"
-          onSubmit={(e: any) => {
+          onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
             e.preventDefault();
             handleSignUp();
           }}

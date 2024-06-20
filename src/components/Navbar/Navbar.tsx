@@ -1,4 +1,5 @@
 import { useStore } from "@/store/strore";
+import { createClient } from "@/utils/supabase/server";
 import React from "react";
 import { MdMenu } from "react-icons/md";
 
@@ -9,7 +10,6 @@ type IProps = {
 
 const Navbar = ({ handleOpenMenu, user }: IProps) => {
   const userName = user?.email?.split("@")[0];
-  console.log(user?.email);
   const { setOpenModal } = useStore();
 
   const handleOpenModal = () => {

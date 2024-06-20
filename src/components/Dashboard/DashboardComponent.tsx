@@ -11,6 +11,7 @@ import { useStore } from "@/store/strore";
 import CustomModal from "../base/CustomModal/CustomModal";
 import CreateBudget from "../CreateBudget/CreateBudget";
 import { toast } from "react-toastify";
+import withAuth from "../ProtectedRoute/Protected";
 
 const tableHeaderData = [
   {
@@ -87,7 +88,6 @@ const DashboardComponent = ({ user }: any) => {
         .select()
         .eq("user_id", userId);
       setExpense(expense);
-      console.log(expense, "expense");
       console.log(error);
     } catch (error) {
     } finally {
@@ -112,8 +112,6 @@ const DashboardComponent = ({ user }: any) => {
     totalSpent?.length !== 0
       ? totalSpent?.reduce((a: number, b: number) => a + b)
       : [];
-
-  console.log(totalSpentValue, lastUpdateMonthlyLimit?.monthLimit);
 
   const balanceValue =
     Number(lastUpdateMonthlyLimit?.monthLimit) - totalSpentValue;
@@ -210,4 +208,4 @@ const DashboardComponent = ({ user }: any) => {
   );
 };
 
-export default DashboardComponent;
+export default withAuth(DashboardComponent);
